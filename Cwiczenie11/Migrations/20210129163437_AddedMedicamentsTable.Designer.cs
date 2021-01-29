@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cwiczenie11.Migrations
 {
     [DbContext(typeof(DoctorsDbContext))]
-    [Migration("20210129081912_AddMed_PrescTable")]
-    partial class AddMed_PrescTable
+    [Migration("20210129163437_AddedMedicamentsTable")]
+    partial class AddedMedicamentsTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -82,84 +82,6 @@ namespace Cwiczenie11.Migrations
                     b.HasKey("idPatient");
 
                     b.ToTable("Patients");
-                });
-
-            modelBuilder.Entity("Cwiczenie11.Models.Prescription", b =>
-                {
-                    b.Property<int>("IdPrescription")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DueDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("IdDoctor")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdPatient")
-                        .HasColumnType("int");
-
-                    b.HasKey("IdPrescription");
-
-                    b.HasIndex("IdDoctor");
-
-                    b.HasIndex("IdPatient");
-
-                    b.ToTable("Prescriptions");
-                });
-
-            modelBuilder.Entity("Cwiczenie11.Models.Prescription_Medicament", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Details")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Dose")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdMedicament")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdPrescription")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("IdMedicament");
-
-                    b.HasIndex("IdPrescription");
-
-                    b.ToTable("Prescriptions_Medicaments");
-                });
-
-            modelBuilder.Entity("Cwiczenie11.Models.Prescription", b =>
-                {
-                    b.HasOne("Cwiczenie11.Models.Doctor", "doctor")
-                        .WithMany("Prescriptions")
-                        .HasForeignKey("IdDoctor");
-
-                    b.HasOne("Cwiczenie11.Models.Patient", "patient")
-                        .WithMany("Prescriptions")
-                        .HasForeignKey("IdPatient");
-                });
-
-            modelBuilder.Entity("Cwiczenie11.Models.Prescription_Medicament", b =>
-                {
-                    b.HasOne("Cwiczenie11.Models.Medicament", "Medicament")
-                        .WithMany("Prescription_Medicaments")
-                        .HasForeignKey("IdMedicament");
-
-                    b.HasOne("Cwiczenie11.Models.Prescription", "Prescription")
-                        .WithMany("Prescription_Medicaments")
-                        .HasForeignKey("IdPrescription");
                 });
 #pragma warning restore 612, 618
         }

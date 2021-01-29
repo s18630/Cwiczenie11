@@ -13,17 +13,14 @@ namespace Cwiczenie11.Models
         public int IdPrescription { get; set; } // jak dodac ze to id
         public DateTime Date { get; set; }
         public DateTime DueDate { get; set; }
-    //    public int IdPatient { get; set; }
-      //  public int IdDoctor{ get; set; }
 
 
 
         [ForeignKey("IdDoctor")]
-       // public int idDoctor { get; set; }
+     
         public  Doctor doctor { get; set; }
 
         [ForeignKey("IdPatient")]
-       // public int idPatient { get; set; }
         public Patient patient { get; set; }
 
 

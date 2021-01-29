@@ -17,5 +17,6 @@ namespace Cwiczenie11.Models
 
 
         public virtual ICollection<Prescription> Prescriptions { get; set; }
+
     }
 }

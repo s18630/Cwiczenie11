@@ -1,32 +1,31 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cwiczenie11.Migrations
 {
-    public partial class AddPatientTable : Migration
+    public partial class DoctorsTableAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Patients",
+                name: "Doctors",
                 columns: table => new
                 {
-                    idPatient = table.Column<int>(nullable: false)
+                    idDoctor = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
-                    BirthDate = table.Column<DateTime>(nullable: false)
+                    Email = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Patients", x => x.idPatient);
+                    table.PrimaryKey("PK_Doctors", x => x.idDoctor);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Patients");
+                name: "Doctors");
         }
     }
 }

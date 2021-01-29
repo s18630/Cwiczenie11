@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cwiczenie11.Migrations
 {
-    public partial class AddPrescriptionTable : Migration
+    public partial class AddedPresciptionTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

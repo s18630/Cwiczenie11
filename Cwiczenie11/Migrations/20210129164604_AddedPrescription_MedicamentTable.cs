@@ -2,7 +2,7 @@
 
 namespace Cwiczenie11.Migrations
 {
-    public partial class AddMed_PrescTable : Migration
+    public partial class AddedPrescription_MedicamentTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,10 +12,10 @@ namespace Cwiczenie11.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Dose = table.Column<int>(nullable: false),
+                    Details = table.Column<string>(nullable: true),
                     IdPrescription = table.Column<int>(nullable: true),
-                    IdMedicament = table.Column<int>(nullable: true),
-                    Dose = table.Column<int>(nullable: true),
-                    Details = table.Column<string>(nullable: true)
+                    IdMedicament = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {

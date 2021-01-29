@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cwiczenie11.Migrations
 {
     [DbContext(typeof(DoctorsDbContext))]
-    [Migration("20210129062349_AddPrescriptionTable")]
-    partial class AddPrescriptionTable
+    [Migration("20210129163136_AddedPatientTable")]
+    partial class AddedPatientTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,27 +42,6 @@ namespace Cwiczenie11.Migrations
                     b.ToTable("Doctors");
                 });
 
-            modelBuilder.Entity("Cwiczenie11.Models.Medicament", b =>
-                {
-                    b.Property<int>("IdMedicament")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("IdMedicament");
-
-                    b.ToTable("Medicaments");
-                });
-
             modelBuilder.Entity("Cwiczenie11.Models.Patient", b =>
                 {
                     b.Property<int>("idPatient")
@@ -82,45 +61,6 @@ namespace Cwiczenie11.Migrations
                     b.HasKey("idPatient");
 
                     b.ToTable("Patients");
-                });
-
-            modelBuilder.Entity("Cwiczenie11.Models.Prescription", b =>
-                {
-                    b.Property<int>("IdPrescription")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DueDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("IdDoctor")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdPatient")
-                        .HasColumnType("int");
-
-                    b.HasKey("IdPrescription");
-
-                    b.HasIndex("IdDoctor");
-
-                    b.HasIndex("IdPatient");
-
-                    b.ToTable("Prescriptions");
-                });
-
-            modelBuilder.Entity("Cwiczenie11.Models.Prescription", b =>
-                {
-                    b.HasOne("Cwiczenie11.Models.Doctor", "doctor")
-                        .WithMany("Prescriptions")
-                        .HasForeignKey("IdDoctor");
-
-                    b.HasOne("Cwiczenie11.Models.Patient", "patient")
-                        .WithMany("Prescriptions")
-                        .HasForeignKey("IdPatient");
                 });
 #pragma warning restore 612, 618
         }
