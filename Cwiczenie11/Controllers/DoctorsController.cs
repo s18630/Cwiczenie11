@@ -99,7 +99,7 @@ namespace Cwiczenie11.Controllers
 
 
 
-        [Route("api/doctor/delete")]
+        [Route("api/doctors/delete")]
         [HttpPost]
         public IActionResult DeleteDoctor(DoctorResponse response)
         {
@@ -125,6 +125,92 @@ namespace Cwiczenie11.Controllers
             return Ok("Doktor o id : " + response.idDoctor+ " został usunięty");
         }
 
+
+
+        [Route("api/doctors/modify")]
+        [HttpPost]
+        public IActionResult ModifyDoctor(ModifyDoctorRequest request)
+        {
+
+            /*    var d1 = _context.Doctors
+                    .Where(d => d.idDoctor==request.idDoctor )
+                         .FirstOrDefault();
+
+                    d1.FirstName = request.FirstName;
+
+
+                    d1.LastName = request.LastName;
+
+
+
+                    d1.Email = request.Email;
+
+
+
+
+                _context.SaveChanges(); //...
+
+
+
+               */
+            var doctor = new Doctor
+                      {
+                          idDoctor=request.idDoctor,
+
+                          FirstName = request.FirstName,
+                          LastName = request.LastName,
+                          Email = request.Email
+
+
+                      };
+
+                      _context.Attach(doctor);
+
+                      if (request.FirstName != null)
+                      {
+                          _context.Entry(doctor).Property("FirstName").IsModified = true;
+
+                      }
+
+                      if (request.LastName != null)
+                      {
+                          _context.Entry(doctor).Property("LastName").IsModified = true;
+
+                      }
+
+                      if (request.Email != null)
+                      {
+                          _context.Entry(doctor).Property("Email").IsModified = true;
+
+                      }
+
+                      _context.SaveChanges();
+
+                     
+
+            return Ok("Dokonano modyfikacji id: " +request.idDoctor );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
 
 
     }
