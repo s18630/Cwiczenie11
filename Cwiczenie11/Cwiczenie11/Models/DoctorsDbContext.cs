@@ -14,11 +14,7 @@ namespace Cwiczenie11.Models
         public DbSet<Medicament> Medicaments { get; set; }
 
         public DbSet<Prescription> Prescriptions { get; set; }
-
-
-
-
-
+        public DbSet<Prescription_Medicament> Prescriptions_Medicaments { get; set; }
 
 
         public DoctorsDbContext()

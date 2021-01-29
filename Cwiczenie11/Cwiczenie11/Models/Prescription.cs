@@ -27,6 +27,6 @@ namespace Cwiczenie11.Models
         public Patient patient { get; set; }
 
 
-
+        public virtual ICollection<Prescription_Medicament> Prescription_Medicaments { get; set; }
     }
 }

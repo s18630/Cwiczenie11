@@ -13,6 +13,8 @@
     <Compile Remove="Migrations\20210129062013_DodanieTabeliPrescription.Designer.cs" />
     <Compile Remove="Migrations\20210129062143_AddPrescriptionTable.cs" />
     <Compile Remove="Migrations\20210129062143_AddPrescriptionTable.Designer.cs" />
+    <Compile Remove="Migrations\20210129081440_AddedMedicament_PrescriptionTable.cs" />
+    <Compile Remove="Migrations\20210129081440_AddedMedicament_PrescriptionTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
