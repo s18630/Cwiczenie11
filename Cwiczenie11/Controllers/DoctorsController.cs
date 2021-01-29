@@ -26,7 +26,7 @@ namespace Cwiczenie11.Controllers
         {
             return Ok(_context.Doctors.ToList());
         }
-        // pobierać dane lekarze, dodawać nowego lekarza, modyfikować dane lekarza i usuwać lekarza (4 końcówki).
+      
 
 
         [Route("api/doctor")]
@@ -61,10 +61,6 @@ namespace Cwiczenie11.Controllers
         {
 
 
-            //sprawdz czy jest takie id jak jest to zwróć błąd
-
-          
-
             var doctor = new Doctor()
             {
      
@@ -76,7 +72,7 @@ namespace Cwiczenie11.Controllers
   
             _context.Doctors.Add(doctor);
 
-            _context.SaveChanges(); //1 transakcja -> 2 INS
+            _context.SaveChanges(); 
 
             var res = _context.Doctors
                      .Where(d => d.FirstName == request.FirstName && d.LastName== request.LastName)
@@ -112,11 +108,6 @@ namespace Cwiczenie11.Controllers
             }
 
 
-         /*   var d = new Doctor
-            {
-                idDoctor = response.idDoctor
-            };
-          //  _context.Attach();*/
             _context.Remove(res);
           
 
@@ -131,62 +122,56 @@ namespace Cwiczenie11.Controllers
         [HttpPost]
         public IActionResult ModifyDoctor(ModifyDoctorRequest request)
         {
-
-            /*    var d1 = _context.Doctors
-                    .Where(d => d.idDoctor==request.idDoctor )
-                         .FirstOrDefault();
-
-                    d1.FirstName = request.FirstName;
-
-
-                    d1.LastName = request.LastName;
+            try
+            {
 
 
 
-                    d1.Email = request.Email;
+                var doctor = new Doctor
+                {
+                    idDoctor = request.idDoctor,
+
+                    FirstName = request.FirstName,
+                    LastName = request.LastName,
+                    Email = request.Email
 
 
+                };
 
+                _context.Attach(doctor);
 
-                _context.SaveChanges(); //...
+                if (request.FirstName != null)
+                {
+                    _context.Entry(doctor).Property("FirstName").IsModified = true;
 
+                }
 
+                if (request.LastName != null)
+                {
+                    _context.Entry(doctor).Property("LastName").IsModified = true;
 
-               */
-            var doctor = new Doctor
-                      {
-                          idDoctor=request.idDoctor,
+                }
 
-                          FirstName = request.FirstName,
-                          LastName = request.LastName,
-                          Email = request.Email
+                if (request.Email != null)
+                {
+                    _context.Entry(doctor).Property("Email").IsModified = true;
 
+                }
 
-                      };
+                _context.SaveChanges();
 
-                      _context.Attach(doctor);
+            }catch(Exception ex)
+            {
 
-                      if (request.FirstName != null)
-                      {
-                          _context.Entry(doctor).Property("FirstName").IsModified = true;
+                var res = _context.Doctors
+                    .Where(d => d.idDoctor == request.idDoctor)
+                    .FirstOrDefault();
+                if (res == null)
+                {
+                    return BadRequest("Nie ma takiego id");
+                }
 
-                      }
-
-                      if (request.LastName != null)
-                      {
-                          _context.Entry(doctor).Property("LastName").IsModified = true;
-
-                      }
-
-                      if (request.Email != null)
-                      {
-                          _context.Entry(doctor).Property("Email").IsModified = true;
-
-                      }
-
-                      _context.SaveChanges();
-
-                     
+            }
 
             return Ok("Dokonano modyfikacji id: " +request.idDoctor );
 
