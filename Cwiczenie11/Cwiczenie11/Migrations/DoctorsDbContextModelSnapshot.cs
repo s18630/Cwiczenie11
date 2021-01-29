@@ -20,7 +20,7 @@ namespace Cwiczenie11.Migrations
 
             modelBuilder.Entity("Cwiczenie11.Models.Doctor", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("idDoctor")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -34,7 +34,7 @@ namespace Cwiczenie11.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("idDoctor");
 
                     b.ToTable("Doctors");
                 });

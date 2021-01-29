@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cwiczenie11.Migrations
 {
     [DbContext(typeof(DoctorsDbContext))]
-    [Migration("20210129035604_AddedDoctorsTable")]
-    partial class AddedDoctorsTable
+    [Migration("20210129044252_DoctorsAdded")]
+    partial class DoctorsAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,7 +22,7 @@ namespace Cwiczenie11.Migrations
 
             modelBuilder.Entity("Cwiczenie11.Models.Doctor", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("idDoctor")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -36,7 +36,7 @@ namespace Cwiczenie11.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("idDoctor");
 
                     b.ToTable("Doctors");
                 });

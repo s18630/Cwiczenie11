@@ -2,7 +2,7 @@
 
 namespace Cwiczenie11.Migrations
 {
-    public partial class AddedDoctorsTable : Migration
+    public partial class DoctorsAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,7 +10,7 @@ namespace Cwiczenie11.Migrations
                 name: "Doctors",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    idDoctor = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
@@ -18,7 +18,7 @@ namespace Cwiczenie11.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Doctors", x => x.id);
+                    table.PrimaryKey("PK_Doctors", x => x.idDoctor);
                 });
         }
 
