@@ -29,7 +29,7 @@ namespace Cwiczenie11.Controllers
         // pobierać dane lekarze, dodawać nowego lekarza, modyfikować dane lekarza i usuwać lekarza (4 końcówki).
 
 
-        [Route("api/doctors")]
+        [Route("api/doctor")]
         [HttpPost]
         public IActionResult GetDoctors(DoctorResponse request)
         {
@@ -96,6 +96,35 @@ namespace Cwiczenie11.Controllers
 
             return Ok(response);
         }
+
+
+
+        [Route("api/doctor/delete")]
+        [HttpPost]
+        public IActionResult DeleteDoctor(DoctorResponse response)
+        {
+            var res = _context.Doctors
+                     .Where(d => d.idDoctor == response.idDoctor)
+                     .FirstOrDefault();
+            if (res == null)
+            {
+                return BadRequest("Nie ma takiego doktora");
+            }
+
+
+         /*   var d = new Doctor
+            {
+                idDoctor = response.idDoctor
+            };
+          //  _context.Attach();*/
+            _context.Remove(res);
+          
+
+            _context.SaveChanges();
+
+            return Ok("Doktor o id : " + response.idDoctor+ " został usunięty");
+        }
+
 
 
     }
