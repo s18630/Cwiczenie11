@@ -21,7 +21,7 @@ namespace Cwiczenie11.Controllers
         [HttpGet]
         public IActionResult GetDoctors()
         {
-            return Ok();
+            return Ok(_context.Doctors.ToList());
         }
 
     }
