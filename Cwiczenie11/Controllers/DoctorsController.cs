@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Cwiczenie11.Controllers
 {
-    [Route("api/doctors")]
+    
     [ApiController]
     public class DoctorsController : ControllerBase
     {
@@ -19,6 +19,8 @@ namespace Cwiczenie11.Controllers
         {
             _context = context;
         }
+
+        [Route("api/doctors")]
         [HttpGet]
         public IActionResult GetDoctors()
         {
@@ -27,17 +29,22 @@ namespace Cwiczenie11.Controllers
         // pobierać dane lekarze, dodawać nowego lekarza, modyfikować dane lekarza i usuwać lekarza (4 końcówki).
 
 
-
+        [Route("api/doctors")]
         [HttpPost]
-        public IActionResult GetDoctors(DoctorResponse response)
+        public IActionResult GetDoctors(DoctorResponse request)
         {
 
 
             var res = _context.Doctors
-                      .Where(d => d.idDoctor == response.idDoctor)
+                      .Where(d => d.idDoctor == request.idDoctor)
                       .FirstOrDefault();
+            if (res == null)
+            {
+                return BadRequest("Nie ma takiego doktora");
+            }
 
-          
+            var response = new DoctorResponse();
+
             response.idDoctor = res.idDoctor;
             response.FirstName = res.FirstName;
             response.LastName = res.LastName;
@@ -45,5 +52,51 @@ namespace Cwiczenie11.Controllers
 
             return Ok(response);
         }
+
+
+
+        [Route("api/doctors/insert")]
+        [HttpPost]
+        public IActionResult InsertDoctors(InsertDoctorRequest request)
+        {
+
+
+            //sprawdz czy jest takie id jak jest to zwróć błąd
+
+          
+
+            var doctor = new Doctor()
+            {
+     
+                FirstName=request.FirstName,
+                LastName=request.LastName,
+                Email=request.Email
+            };
+
+  
+            _context.Doctors.Add(doctor);
+
+            _context.SaveChanges(); //1 transakcja -> 2 INS
+
+            var res = _context.Doctors
+                     .Where(d => d.FirstName == request.FirstName && d.LastName== request.LastName)
+                     .FirstOrDefault();
+
+            if (res == null)
+            {
+                return BadRequest("Nie ma takiego doktora");
+            }
+
+            var response = new DoctorResponse();
+
+            response.idDoctor = res.idDoctor;
+            response.FirstName = res.FirstName;
+            response.LastName = res.LastName;
+            response.Email = res.Email;
+
+            return Ok(response);
+        }
+
+
     }
 }
