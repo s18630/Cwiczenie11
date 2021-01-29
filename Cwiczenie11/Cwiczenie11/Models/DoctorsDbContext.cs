@@ -9,21 +9,23 @@ namespace Cwiczenie11.Models
     public class DoctorsDbContext : DbContext
     {
 
-        public DbSet<Doctor> Doctors {get;set;}
+        public DbSet<Doctor> Doctors {get; set;}
+
+
+
 
 
 
         public DoctorsDbContext()
         {
 
+
         }
 
-        public DoctorsDbContext(DbContextOptions options):base(options) // jak super
+        public DoctorsDbContext(DbContextOptions options)
+        :base(options)
         {
 
         }
-
-
-
     }
 }
